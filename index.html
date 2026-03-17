@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="es" data-bs-theme="light">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ResiHub - Tecnológico de Minatitlán</title>
+    <title>ResiHub - Versión 2 - TecNM</title>
     
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.0/font/bootstrap-icons.css">
@@ -16,151 +16,484 @@
 </head>
 <body>
 
-    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm">
+    <nav class="navbar navbar-expand-lg navbar-light bg-white sticky-top shadow-sm transition-navbar" id="mainNav">
         <div class="container d-flex justify-content-between align-items-center py-2">
-            <a class="navbar-brand d-flex align-items-center fw-bold" href="#">
+            <a class="navbar-brand d-flex align-items-center fw-bold" href="#" onclick="showSection('inicio', event)">
                 <img src="img/ITMina.png" alt="Logo ITMina" height="50" class="me-2">
-                <span class="fs-5 text-dark">TECNM - RESIDENCIAS</span>
+                <span class="fs-5 text-dark" id="navBrandText">TECNM - RESIDENCIAS</span>
             </a>
+            
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+
             <div class="collapse navbar-collapse justify-content-end" id="navbarNav">
-                <div class="navbar-nav gap-2">
-                    <a class="nav-link active bg-light rounded-pill px-3 text-primary fw-bold" href="index.html">Inicio</a>
-    
-                    <a class="nav-link fw-bold" href="solicitud.html">Solicitud</a>
-    
-                    <a class="nav-link fw-bold" href="seguimiento.html">Seguimiento</a>
-    
-                    <a class="nav-link fw-bold" href="liberacion.html">Liberación</a>
-                    </div>
+                <div class="navbar-nav gap-2 mt-3 mt-lg-0 text-center text-lg-start align-items-lg-center">
+                    <a class="nav-link px-3 fw-bold active-section" href="#" onclick="showSection('inicio', event)">Inicio</a>
+                    <a class="nav-link px-3 fw-bold" href="#" onclick="showSection('solicitud', event)">Solicitud</a>
+                    <a class="nav-link px-3 fw-bold" href="#" onclick="showSection('seguimiento', event)">Seguimiento</a>
+                    <a class="nav-link px-3 fw-bold" href="#" onclick="showSection('liberacion', event)">Liberación</a>
+                    
+                    <a class="nav-link px-3 fw-bold text-primary" href="#" id="navLoginBtn" data-bs-toggle="modal" data-bs-target="#loginModal"><i class="bi bi-person-circle me-1"></i>Entrar</a>
+                    <a class="nav-link px-3 fw-bold text-success d-none" href="#" id="navPanelBtn" onclick="showSection('dashboard', event)"><i class="bi bi-layout-text-window me-1"></i>Mi Panel</a>
+                    <a class="nav-link px-3 fw-bold text-danger d-none" href="#" id="navLogoutBtn" onclick="logoutJS(event)"><i class="bi bi-box-arrow-right me-1"></i>Salir</a>
+
+                    <button class="btn btn-outline-secondary btn-sm ms-lg-3 mt-2 mt-lg-0 rounded-pill d-flex align-items-center justify-content-center mx-auto" style="width: 100px;" onclick="toggleDarkMode()" id="darkModeBtn">
+                        <i class="bi bi-moon-fill me-2"></i> Oscuro
+                    </button>
+                </div>
             </div>
         </div>
     </nav>
 
-    <header class="hero-section text-white text-start">
-        <div class="container py-5">
-            <div class="row py-5 align-items-center">
-                <div class="col-lg-7">
-                    <span class="badge bg-white bg-opacity-10 text-white fw-bold text-uppercase mb-3 rounded-pill px-3 py-2">Gestión de Residencias Profesionales</span>
-                    <h1 class="display-3 fw-extrabold mb-4">Tu camino hacia la titulación comienza aquí</h1>
-                    <p class="lead mb-5 text-white-75">ResiHub centraliza todos los trámites, formatos y guías que necesitas para tu residencia profesional en el Tecnológico de Minatitlán. Sin confusiones, sin retrasos.</p>
-                    <div class="d-flex gap-3">
-                        <a href="#" class="btn btn-light btn-lg px-4 fw-bold rounded-pill text-primary shadow">Iniciar Trámite →</a>
-                        <a href="#" class="btn btn-outline-light btn-lg px-4 rounded-pill">Ver Requisitos</a>
+    <div id="inicio" class="app-section active">
+        <header class="hero-section text-white text-start">
+            <div class="container py-5">
+                <div class="row py-5 align-items-center">
+                    <div class="col-lg-7">
+                        <span class="badge bg-white bg-opacity-10 text-white fw-bold text-uppercase mb-3 rounded-pill px-3 py-2">Gestión de Residencias Profesionales</span>
+                        <h1 class="display-3 fw-extrabold mb-4 text-white">Tu camino hacia la titulación comienza aquí</h1>
+                        <p class="lead mb-5 text-white-75">ResiHub centraliza todos los trámites, formatos y guías que necesitas para tu residencia profesional en el Tecnológico de Minatitlán. Sin confusiones, sin retrasos.</p>
+                        <div class="d-flex flex-wrap gap-3">
+                            <button onclick="showSection('solicitud', event)" class="btn btn-light btn-lg px-4 fw-bold rounded-pill text-primary shadow">Iniciar Trámite →</button>
+                            <button onclick="showSection('proceso', event)" class="btn btn-outline-light btn-lg px-4 rounded-pill">Ver Requisitos</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    </header>
+        </header>
 
-    <section class="py-5 bg-white">
-        <div class="container text-center py-5">
-            <h2 class="fw-bold mb-3 display-6">Tu proceso paso a paso</h2>
-            <p class="text-muted mb-5 mx-auto" style="max-width: 600px;">Hemos simplificado la gestión administrativa en tres etapas claras.</p>
+        <section id="proceso" class="py-5">
+            <div class="container text-center py-5">
+                <h2 class="fw-bold mb-3 display-6">Tu proceso paso a paso</h2>
+                <p class="text-muted mb-5 mx-auto" style="max-width: 600px;">Hemos simplificado la gestión administrativa en tres etapas claras.</p>
+                <div class="row g-4 justify-content-center">
+                    <div class="col-md-4">
+                        <div class="card h-100 border-step-blue p-4 text-start card-custom shadow-sm">
+                            <div class="icon-box bg-blue-light mb-4"><i class="bi bi-file-earmark-text text-primary fs-3"></i></div>
+                            <h4 class="fw-bold fs-5">1. Solicitud</h4>
+                            <p class="text-muted small">Inicia tu proceso con los formatos de solicitud y anteproyecto.</p>
+                            <button onclick="showSection('solicitud', event)" class="btn btn-link text-primary p-0 fw-bold text-decoration-none small mt-auto text-start">Ver documentos →</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-step-gray p-4 text-start card-custom shadow-sm">
+                            <div class="icon-box bg-gray-light mb-4"><i class="bi bi-check-circle text-muted fs-3"></i></div>
+                            <h4 class="fw-bold fs-5">2. Seguimiento</h4>
+                            <p class="text-muted small">Entrega tus reportes bimestrales y mantén tu expediente al día.</p>
+                            <button onclick="showSection('seguimiento', event)" class="btn btn-link text-secondary p-0 fw-bold text-decoration-none small mt-auto text-start">Ver documentos →</button>
+                        </div>
+                    </div>
+                    <div class="col-md-4">
+                        <div class="card h-100 border-step-red p-4 text-start card-custom shadow-sm">
+                            <div class="icon-box bg-red-light mb-4"><i class="bi bi-mortarboard text-danger fs-3"></i></div>
+                            <h4 class="fw-bold fs-5">3. Liberación</h4>
+                            <p class="text-muted small">Finaliza tu residencia con el informe final y obtén tu liberación.</p>
+                            <button onclick="showSection('liberacion', event)" class="btn btn-link text-danger p-0 fw-bold text-decoration-none small mt-auto text-start">Ver documentos →</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="py-5" style="background-color: var(--secondary-bg);">
+            <div class="container py-5">
+                <div class="row align-items-center g-5 text-start">
+                    <div class="col-lg-6">
+                        <h2 class="fw-bold mb-4">¿Por qué usar TECNM - RES?</h2>
+                        <p class="text-muted mb-5">El departamento de gestión tecnológica ha desarrollado esta plataforma para resolver los problemas comunes que enfrentan los residentes, garantizando transparencia y agilidad.</p>
+                        
+                        <div class="d-flex flex-column gap-4">
+                            <div class="d-flex gap-3">
+                                <div class="feat-icon bg-blue-light text-primary"><i class="bi bi-file-earmark-check"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Documentación Oficial</h6>
+                                    <p class="small text-muted mb-0">Formatos actualizados y validados por el departamento de gestión tecnológica.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3">
+                                <div class="feat-icon bg-yellow-light text-warning"><i class="bi bi-lightbulb"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Guías Explicativas</h6>
+                                    <p class="small text-muted mb-0">Manuales paso a paso para el llenado correcto, evitando rechazos.</p>
+                                </div>
+                            </div>
+                            <div class="d-flex gap-3">
+                                <div class="feat-icon bg-green-light text-success"><i class="bi bi-clock-history"></i></div>
+                                <div>
+                                    <h6 class="fw-bold mb-1">Optimización de Tiempo</h6>
+                                    <p class="small text-muted mb-0">Reduce tiempos de espera al entregar documentación correcta desde el primer intento.</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-6 text-center">
+                        <div class="p-4 rounded-4 shadow-sm border border-secondary border-opacity-25" style="background-color: var(--card-bg); max-width: 400px; margin: 0 auto;">
+                            <img src="img/ImgenPrevisualizada.jpg" alt="Previsualización de formatos digitales" class="img-fluid rounded-3 shadow">
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="cta-section text-white text-center py-5">
+            <div class="container py-4">
+                <h2 class="fw-bold mb-3 text-white">¿Listo para comenzar tu residencia?</h2>
+                <p class="text-white-50 mb-4">Descarga el manual completo de procedimientos antes de iniciar.</p>
+                <button class="btn btn-light btn-lg px-5 fw-bold rounded-pill text-red shadow" onclick="descargarJS(this)">
+                    <i class="bi bi-download me-2"></i>Descargar Manual General
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <div id="solicitud" class="app-section">
+        <header class="border-bottom py-5">
+            <div class="container text-center">
+                <div class="icon-box bg-blue-light mx-auto mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-file-earmark-text text-primary fs-2"></i>
+                </div>
+                <h1 class="fw-extrabold display-5 mb-2">Etapa 1: Solicitud</h1>
+                <p class="text-muted mx-auto small" style="max-width: 700px;">
+                    Descarga y completa los formatos necesarios para iniciar tu trámite. Asegúrate de leer las guías de llenado para evitar errores.
+                </p>
+            </div>
+        </header>
+        
+        <section class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-blue-light"><i class="bi bi-file-earmark-pdf text-primary fs-4"></i></div>
+                            <i class="bi bi-question-circle text-muted"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Solicitud de Residencia Profesional</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Formato oficial para solicitar el inicio de tu residencia. Debe ser llenado con tus datos personales y académicos.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-primary w-75 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                            <button class="btn btn-outline-secondary w-25 fw-bold btn-sm py-2 border-opacity-25" style="color:var(--text-color);">Guía</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-blue-light"><i class="bi bi-file-earmark-medical text-primary fs-4"></i></div>
+                            <i class="bi bi-question-circle text-muted"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Formato de Autorización del Proyecto</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Documento que describe el proyecto a realizar. Incluye objetivos, justificación y cronograma preliminar.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-primary w-75 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                            <button class="btn btn-outline-secondary w-25 fw-bold btn-sm py-2 border-opacity-25" style="color:var(--text-color);">Guía</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-blue-light"><i class="bi bi-file-earmark-check text-primary fs-4"></i></div>
+                            <i class="bi bi-question-circle text-muted"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Acuse</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;"> Documento que sirve para dar constancia legal y formal de la entrega-recepción de la documentación técnica y académica requerida para el proceso de Residencias Profesionales.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-primary w-75 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                            <button class="btn btn-outline-secondary w-25 fw-bold btn-sm py-2 border-opacity-25" style="color:var(--text-color);">Guía</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mb-5 text-start">
+            <div class="p-4 rounded-4 alert-blue-custom">
+                <h6 class="fw-bold text-primary mb-3">¿Qué sigue después?</h6>
+                <p class="text-muted mb-3" style="font-size: 0.85rem;">Una vez que tengas todos estos documentos, deberás enviarlos al correo de coordinación de tu carrera o entregarlos en ventanilla.</p>
+                <ul class="text-muted small mb-0 d-grid gap-2">
+                    <li>Espera la validación de tu anteproyecto.</li>
+                    <li>Se te asignará un asesor interno.</li>
+                    <li>Recibirás tu dictamen de aprobación.</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <div id="seguimiento" class="app-section">
+        <header class="border-bottom py-5">
+            <div class="container text-center">
+                <div class="icon-box bg-gray-light mx-auto mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-check-circle text-muted fs-2"></i>
+                </div>
+                <h1 class="fw-extrabold display-5 mb-2">Etapa 2: Seguimiento</h1>
+                <p class="text-muted mx-auto small" style="max-width: 700px;">
+                    Entrega tus reportes bimestrales y mantén tu expediente al día para asegurar el avance de tu residencia profesional.
+                </p>
+            </div>
+        </header>
+
+        <section class="container py-5">
+            <div class="row g-4">
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-gray-light"><i class="bi bi-file-earmark-bar-graph text-muted fs-4"></i></div>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Primer Reporte Bimestral</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Primer avance de tu proyecto, debe ser entregado a los 2 meses de haber iniciado.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-dark w-100 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-gray-light"><i class="bi bi-file-earmark-bar-graph text-muted fs-4"></i></div>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Segundo Reporte Bimestral</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Segundo avance, correspondiente al periodo intermedio de tu residencia.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-dark w-100 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-gray-light"><i class="bi bi-file-earmark-bar-graph text-muted fs-4"></i></div>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Tercer Reporte Bimestral</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Tercer avance, solo si tu residencia excede los 4 meses regulares.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-dark w-100 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-4">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-gray-light"><i class="bi bi-clipboard-check text-muted fs-4"></i></div>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Formato de Evaluación</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Evaluación que debe realizar tu asesor externo sobre tu desempeño en la empresa.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-dark w-100 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mb-5 text-start">
+            <div class="p-4 rounded-4 alert-blue-custom">
+                <h6 class="fw-bold text-primary mb-3">¡Importante!</h6>
+                <p class="text-muted mb-3" style="font-size: 0.85rem;">Los reportes deben ser entregados en tiempo y forma. Un retraso mayor a 5 días hábiles puede ameritar una sanción en tu calificación final.</p>
+                <ul class="text-muted small mb-0 d-grid gap-2">
+                    <li>Firma asesor interno</li>
+                    <li>Firma asesor externo</li>
+                    <li>Sello de la empresa</li>
+                </ul>
+            </div>
+        </section>
+    </div>
+
+    <div id="liberacion" class="app-section">
+        <header class="border-bottom py-5">
+            <div class="container text-center">
+                <div class="icon-box bg-red-light mx-auto mb-3" style="width: 60px; height: 60px;">
+                    <i class="bi bi-mortarboard text-danger fs-2"></i>
+                </div>
+                <h1 class="fw-extrabold display-5 mb-2">Etapa 3: Liberación</h1>
+                <p class="text-muted mx-auto small" style="max-width: 700px;">
+                    ¡Casi terminas! Entrega tu informe final y obtén tu carta de liberación para proceder con la titulación.
+                </p>
+            </div>
+        </header>
+
+        <section class="container py-5">
             <div class="row g-4 justify-content-center">
-                <div class="col-md-4">
-                    <div class="card h-100 border-step-blue p-4 text-start card-custom shadow-sm">
-                        <div class="icon-box bg-blue-light mb-4"><i class="bi bi-file-earmark-text text-primary fs-3"></i></div>
-                        <h4 class="fw-bold fs-5">1. Solicitud</h4>
-                        <p class="text-muted small">Inicia tu proceso con los formatos de solicitud y anteproyecto.</p>
-                        <a href="solicitud.html" class="text-primary fw-bold text-decoration-none small mt-auto">Ver documentos →</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 border-step-gray p-4 text-start card-custom shadow-sm">
-                        <div class="icon-box bg-gray-light mb-4"><i class="bi bi-check-circle text-muted fs-3"></i></div>
-                        <h4 class="fw-bold fs-5">2. Seguimiento</h4>
-                        <p class="text-muted small">Entrega tus reportes bimestrales y mantén tu expediente al día.</p>
-                        <a href="seguimiento.html" class="text-primary fw-bold text-decoration-none small mt-auto">Ver documentos →</a>
-                    </div>
-                </div>
-                <div class="col-md-4">
-                    <div class="card h-100 border-step-red p-4 text-start card-custom shadow-sm">
-                        <div class="icon-box bg-red-light mb-4"><i class="bi bi-mortarboard text-danger fs-3"></i></div>
-                        <h4 class="fw-bold fs-5">3. Liberación</h4>
-                        <p class="text-muted small">Finaliza tu residencia con el informe final y obtén tu liberación.</p>
-                        <a href="liberacion.html" class="text-danger fw-bold text-decoration-none small mt-auto">Ver documentos →</a>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="py-5 bg-light">
-        <div class="container py-5">
-            <div class="row align-items-center g-5 text-start">
-                <div class="col-lg-6">
-                    <h2 class="fw-bold mb-4">¿Por qué usar TECNM - RES?</h2>
-                    <p class="text-muted mb-5">El departamento de gestión tecnológica ha desarrollado esta plataforma para resolver los problemas comunes que enfrentan los residentes, garantizando transparencia y agilidad.</p>
-                    
-                    <div class="d-flex flex-column gap-4">
-                        <div class="d-flex gap-3">
-                            <div class="feat-icon bg-blue-light text-primary"><i class="bi bi-file-earmark-check"></i></div>
-                            <div>
-                                <h6 class="fw-bold mb-1">Documentación Oficial</h6>
-                                <p class="small text-muted mb-0">Formatos actualizados y validados por el departamento de gestión tecnológica.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-3">
-                            <div class="feat-icon bg-yellow-light text-warning"><i class="bi bi-lightbulb"></i></div>
-                            <div>
-                                <h6 class="fw-bold mb-1">Guías Explicativas</h6>
-                                <p class="small text-muted mb-0">Manuales paso a paso para el llenado correcto, evitando rechazos.</p>
-                            </div>
-                        </div>
-                        <div class="d-flex gap-3">
-                            <div class="feat-icon bg-green-light text-success"><i class="bi bi-clock-history"></i></div>
-                            <div>
-                                <h6 class="fw-bold mb-1">Optimización de Tiempo</h6>
-                                <p class="small text-muted mb-0">Reduce tiempos de espera al entregar documentación correcta desde el primer intento.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="p-4 bg-light rounded-4 shadow-sm border border-secondary border-opacity-25" style="max-width: 400px; margin: 0 auto;">
-    <img src="img/ImgenPrevisualizada.jpg" alt="Previsualización de formatos digitales" class="img-fluid rounded-3 shadow">
-</div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="cta-section text-white text-center py-5">
-        <div class="container py-4">
-            <h2 class="fw-bold mb-3">¿Listo para comenzar tu residencia?</h2>
-            <p class="text-white-50 mb-4">Descarga el manual completo de procedimientos antes de iniciar.</p>
-            <a href="#" class="btn btn-light btn-lg px-5 fw-bold rounded-pill text-red shadow">
-                <i class="bi bi-download me-2"></i>Descargar Manual General
-            </a>
-        </div>
-    </section>
-
-    <footer class="footer-dark text-white pt-5 pb-3">
-        <div class="container">
-            <div class="row g-4 border-bottom border-white-10 pb-4 mb-3 text-start">
                 <div class="col-md-5">
-                    <h5 class="fw-bold mb-3 d-flex align-items-center">
-                        <i class="bi bi-mortarboard-fill me-2"></i>TECNM - RES
-                    </h5>
-                    <p class="small text-secondary">Plataforma oficial del Instituto Tecnológico de Minatitlán.</p>
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="d-flex justify-content-between mb-3">
+                            <div class="icon-box bg-green-light"><i class="bi bi-file-spreadsheet text-success fs-4"></i></div>
+                            <i class="bi bi-question-circle text-muted"></i>
+                        </div>
+                        <h6 class="fw-bold mb-2 small">Formato de Evaluación Final</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Rúbrica de evaluación que llenan tus asesores (interno y externo).</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-dark w-75 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                            <button class="btn btn-outline-secondary w-25 fw-bold btn-sm py-2 border-opacity-25" style="color:var(--text-color);">Guía</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-md-5">
+                    <div class="card h-100 border-0 shadow-sm p-4 card-custom text-start">
+                        <div class="icon-box bg-blue-light mb-3"><i class="bi bi-file-earmark-person text-primary fs-4"></i></div>
+                        <h6 class="fw-bold mb-2 small">Solicitud de Liberación</h6>
+                        <p class="text-muted" style="font-size: 0.75rem;">Formato interno para solicitar tu carta de liberación académica.</p>
+                        <div class="d-flex gap-2 mt-auto">
+                            <button class="btn btn-dark w-100 fw-bold btn-sm py-2" onclick="descargarJS(this)"><i class="bi bi-download me-2"></i>Descargar</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="container mb-5 text-center">
+            <div class="p-5 rounded-4 alert-pink-custom">
+                <h4 class="fw-bold text-danger mb-3">¡Felicidades por llegar hasta aquí!</h4>
+                <p class="text-muted mx-auto mb-4" style="max-width: 600px; font-size: 0.85rem;">
+                    Una vez entregada toda la documentación y aprobada tu residencia, el departamento de gestión tecnológica emitirá tu <strong>Carta de Liberación de Residencia Profesional</strong>, requisito indispensable para tu acto de recepción profesional.
+                </p>
+                <button class="btn btn-danger btn-lg px-4 fw-bold rounded-pill shadow-sm" style="background-color: #e11d48; border: none;">
+                    Ver Requisitos de Titulación
+                </button>
+            </div>
+        </section>
+    </div>
+
+    <div id="dashboard" class="app-section">
+        <header class="bg-white border-bottom py-5" style="background-color: var(--primary-bg) !important;">
+            <div class="container text-start">
+                <div class="d-flex align-items-center mb-4">
+                    <div class="bg-primary text-white rounded-circle d-flex align-items-center justify-content-center me-3 shadow" style="width: 70px; height: 70px; font-size: 28px;">
+                        <i class="bi bi-person"></i>
+                    </div>
+                    <div>
+                        <h1 class="fw-extrabold mb-0">Hola, Victor Alberto</h1>
+                        <p class="text-muted mb-0">Ingeniería en Sistemas Computacionales | No. Control: L15280220</p>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <section class="container py-5" style="background-color: var(--primary-bg);">
+            <div class="row g-4">
+                <div class="col-lg-8">
+                    <div class="card border-0 shadow-sm p-4 card-custom mb-4">
+                        <h5 class="fw-bold mb-4"><i class="bi bi-bar-chart-fill text-primary me-2"></i>Progreso de Residencia</h5>
+                        
+                        <div class="d-flex justify-content-between text-muted small mb-2">
+                            <span>Fase 1: Solicitud</span>
+                            <span class="text-primary fw-bold">Fase 2: Seguimiento</span>
+                            <span>Fase 3: Liberación</span>
+                        </div>
+                        <div class="progress mb-4" style="height: 15px; border-radius: 10px;">
+                            <div class="progress-bar progress-bar-striped progress-bar-animated bg-primary" role="progressbar" style="width: 66%">66%</div>
+                        </div>
+
+                        <div class="p-3 rounded-3" style="background-color: var(--secondary-bg); border: 1px solid var(--border-color);">
+                            <h6 class="fw-bold text-primary mb-2">Próximo paso requerido:</h6>
+                            <p class="small text-muted mb-0">Debes entregar tu <strong>Segundo Reporte Bimestral</strong> antes del 15 de Noviembre. Asegúrate de incluir las firmas correspondientes.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-4">
+                    <div class="card border-0 shadow-sm p-4 card-custom h-100">
+                        <h5 class="fw-bold mb-4"><i class="bi bi-info-circle-fill text-secondary me-2"></i>Detalles del Proyecto</h5>
+                        <ul class="list-unstyled small">
+                            <li class="mb-3">
+                                <span class="d-block text-muted">Nombre del Proyecto</span>
+                                <strong style="color: var(--text-heading);">Desarrollo de Plataforma Web para Gestión Administrativa</strong>
+                            </li>
+                            <li class="mb-3">
+                                <span class="d-block text-muted">Empresa / Institución</span>
+                                <strong style="color: var(--text-heading);">TecNM Campus Minatitlán</strong>
+                            </li>
+                            <li class="mb-3">
+                                <span class="d-block text-muted">Asesor Interno</span>
+                                <strong style="color: var(--text-heading);">Ing. Juan Pérez Gómez</strong>
+                            </li>
+                            <li>
+                                <span class="d-block text-muted">Fecha de Inicio</span>
+                                <strong style="color: var(--text-heading);">15 de Agosto de 2026</strong>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <div class="modal fade" id="loginModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content p-3" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
+                <div class="modal-header border-bottom-0 pb-0">
+                    <h5 class="modal-title fw-bold text-center w-100">Iniciar Sesión</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <p class="text-muted small mb-4">Ingresa con tu correo institucional</p>
+                    <div class="mb-3 text-start">
+                        <label class="form-label fw-bold small">No. Control / Correo</label>
+                        <input type="email" class="form-control" placeholder="L19080000" style="background-color: var(--primary-bg); color: var(--text-color); border: 1px solid var(--border-color);">
+                    </div>
+                    <div class="mb-4 text-start">
+                        <label class="form-label fw-bold small">Contraseña</label>
+                        <input type="password" class="form-control" placeholder="••••••••" style="background-color: var(--primary-bg); color: var(--text-color); border: 1px solid var(--border-color);">
+                    </div>
+                    <button class="btn btn-primary w-100 fw-bold mb-3" onclick="loginJS()">Entrar al Sistema</button>
+                    
+                    <a href="#" class="small text-decoration-none text-muted" data-bs-dismiss="modal" data-bs-toggle="modal" data-bs-target="#resetModal">¿Olvidaste tu contraseña?</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="resetModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content" style="background-color: var(--card-bg); border: 1px solid var(--border-color);">
+                <div class="modal-header border-bottom-0">
+                    <h5 class="modal-title fw-bold">Recuperar Acceso</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <p class="text-muted small mb-4">Si olvidaste tu contraseña, ingresa tu correo registrado de manera manual. Te enviaremos un acceso temporal de 10 minutos para cambiarla. <br><span class="text-danger fw-bold">Nota:</span> Esta acción solo se puede realizar cada 30 minutos.</p>
+                    <div class="mb-3">
+                        <label class="form-label fw-bold small">Correo Institucional Registrado</label>
+                        <input type="email" class="form-control" placeholder="L12345678@minatitlan.tecnm.mx" style="background-color: var(--primary-bg); color: var(--text-color); border: 1px solid var(--border-color);">
+                    </div>
+                    <button class="btn btn-primary w-100 fw-bold">Enviar Enlace Temporal</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer-dark text-white pt-5 pb-3 mt-auto">
+        <div class="container text-start">
+            <div class="row g-4 border-bottom border-secondary pb-4 mb-3">
+                <div class="col-md-5">
+                    <h5 class="fw-bold mb-3 d-flex align-items-center text-white"><i class="bi bi-mortarboard-fill me-2"></i>TECNM - RES</h5>
+                    <p class="small text-secondary">Plataforma oficial del Instituto Tecnológico de Minatitlán. Versión 2.0</p>
                 </div>
                 <div class="col-md-3">
-                    <h6 class="fw-bold mb-3">Enlaces Rápidos</h6>
+                    <h6 class="fw-bold mb-3 small text-white">Enlaces Rápidos</h6>
                     <ul class="list-unstyled small text-secondary">
-                        <li class="mb-2">Solicitud de Residencia</li>
-                        <li class="mb-2">Formatos de Seguimiento</li>
-                        <li>Proceso de Liberación</li>
+                        <li class="mb-2"><a href="#" onclick="showSection('solicitud', event)" class="text-secondary text-decoration-none">Solicitud de Residencia</a></li>
+                        <li class="mb-2"><a href="#" onclick="showSection('seguimiento', event)" class="text-secondary text-decoration-none">Formatos de Seguimiento</a></li>
+                        <li><a href="#" onclick="showSection('liberacion', event)" class="text-secondary text-decoration-none">Proceso de Liberación</a></li>
                     </ul>
                 </div>
-                <div class="col-md-4 text-start">
-                    <h6 class="fw-bold mb-3">Contacto</h6>
-                    <p class="small text-secondary mb-1"><i class="bi bi-envelope me-2"></i>gestion.tecnologica@itmina.edu.mx</p>
+                <div class="col-md-4">
+                    <h6 class="fw-bold mb-3 small text-white">Contacto</h6>
+                    <p class="small text-secondary mb-1"><i class="bi bi-envelope me-2"></i>gestion@itmina.edu.mx</p>
                     <p class="small text-secondary"><i class="bi bi-geo-alt me-2"></i>TecNM Campus Minatitlán</p>
                 </div>
             </div>
-            <div class="text-center small text-secondary">© 2026 ResiHub - TecNM / ITMina</div>
+            <div class="text-center small text-secondary">© 2026 ResiHub - Proyecto Web V2</div>
         </div>
     </footer>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="js/app.js"></script>
 </body>
 </html>
